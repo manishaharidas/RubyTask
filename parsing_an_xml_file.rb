@@ -2,10 +2,12 @@ require 'rexml/document'
 require 'mysql'
 include REXML
 
-mysql = Mysql.new("localhost", "root", "", "diasdb")
+mysql = Mysql.new("localhost", "root", "", "diasdb") # connection to mysql database "diasdb"
 xmlfile = File.new("sitemap.xml")
-xmldoc = Document.new(xmlfile)
+
+xmldoc = Document.new(xmlfile) # converting the xmlfile into document
 puts("the given xml file is parsed and the result is ")
+
 puts(xmldoc)   #the parsed xml file is displayed.
 
 
@@ -16,7 +18,7 @@ mysql.query("create table if not exists urlset(id int auto_increment primary key
 
 xmldoc.elements.each("urlset/url") do |e|  
 	
-	@loc=e.elements["loc"].text.to_s
+	@loc=e.elements["loc"].text.to_s 
 
 	@priority=e.elements["priority"].text.to_s
 	
@@ -31,9 +33,10 @@ end
 puts "Location and Priority are added to mysql table \"urlset\""
 puts "Location       Priority"
 result = mysql.query("select * from urlset ")
-result.each_hash do |f|
-    puts "#{f['location']}    #{f['priority']}"
-    puts ""
+result.each_hash do |i|
+
+    puts "#{i['location']}    #{i['priority']}"
+  
   end	
 
 
