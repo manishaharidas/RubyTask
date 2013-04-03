@@ -18,7 +18,7 @@ xmldoc.elements.each("urlset/url") do |e|
 end
 # displaying the table urlset from database
 puts "Location and Priority are added to mysql table \"urlset\""
-puts "Location       Priority"
+puts "Location            Priority"
 result = mysql.query("select * from urlset ")
 result.each_hash do |i|
     puts "#{i['location']}    #{i['priority']}"
